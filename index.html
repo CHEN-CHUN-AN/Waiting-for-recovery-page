@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>國立故宮博物院 - 系統維護中</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             background: url('https://south.npm.gov.tw/FileDownLoad/Exhibitions/NotSet/20200514212528627383.jpg') no-repeat center center fixed;
@@ -31,6 +34,384 @@
             border: 1px solid #eaeaea;
         }
 
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #346a95;
+        }
+
+        .status-container {
+            background-color: #f0f7ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #346a95;
+        }
+
+        .status-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #346a95;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 12px 0;
+            color: #555;
+        }
+
+        .reassurance {
+            font-weight: 500;
+            color: #346a95;
+        }
+
+        .estimate {
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .loading-container {
+            margin: 30px 0 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #e6e6e6;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 15px 0;
+            position: relative;
+            background: linear-gradient(to bottom, #a1c4e6, #c4e0f9);
+        }
+
+        .progress {
+            height: 100%;
+            width: 10%;
+            position: relative;
+            animation: sailing 30s linear forwards;
+            background: transparent;
+        }
+
+
+        .ancient-boat {
+            position: absolute;
+            right: -70px;
+            top: 5px;
+            z-index: 10;
+            animation: rockAncientBoat 3s infinite ease-in-out;
+            width: 70px;
+            height: 50px;
+        }
+
+
+        .boat-hull {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 12px;
+            background-color: #A0522D;
+            border-radius: 10% 15% 5% 5%;
+            z-index: 1;
+        }
+
+
+        .boat-hull:after {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: 2px;
+            right: 2px;
+            height: 2px;
+            background-color: #8B4513;
+            border-radius: 10% 15% 0 0;
+        }
+
+
+        .boat-tail {
+            position: absolute;
+            bottom: 12px;
+            right: 5px;
+            width: 10px;
+            height: 15px;
+            background-color: #A0522D;
+            transform: skewX(20deg);
+            z-index: 2;
+        }
+
+
+        .boat-head {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            width: 10px;
+            height: 5px;
+            background-color: #A0522D;
+            transform: skewX(-30deg);
+            z-index: 2;
+        }
+
+
+        .boat-roof {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            width: 25px;
+            height: 8px;
+            background-color: #8B4513;
+            border-radius: 40% 40% 0 0;
+            z-index: 4;
+        }
+
+
+        .boat-people {
+            position: absolute;
+            bottom: 12px;
+            left: 10px;
+            width: 50px;
+            height: 25px;
+            z-index: 3;
+        }
+
+
+        .person1 {
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            width: 6px;
+            height: 16px;
+            background-color: #556B2F;
+            z-index: 3;
+        }
+
+
+        .person1:after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 0.5px;
+            width: 5px;
+            height: 5px;
+            background-color: #F5DEB3;
+            border-radius: 50%;
+        }
+
+
+        .person2 {
+            position: absolute;
+            bottom: 0;
+            right: 5px;
+            width: 6px;
+            height: 15px;
+            background-color: #191970;
+            z-index: 3;
+        }
+
+
+        .person2:after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 0.5px;
+            width: 5px;
+            height: 5px;
+            background-color: #F5DEB3;
+            border-radius: 50%;
+        }
+
+
+        .boat-pole {
+            position: absolute;
+            bottom: 12px;
+            left: 40px;
+            width: 2px;
+            height: 20px;
+            background-color: #654321;
+            z-index: 2;
+        }
+
+
+        .boat-flag {
+            position: absolute;
+            bottom: 25px;
+            left: 42px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid #B22222;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            z-index: 2;
+            animation: flagWave 3s infinite ease-in-out;
+        }
+
+
+        .boat-oar-left {
+            position: absolute;
+            left: 10px;
+            bottom: 2px;
+            width: 12px;
+            height: 2px;
+            background-color: #654321;
+            transform: rotate(-10deg);
+            z-index: 0;
+            animation: rowOar 1.5s infinite alternate;
+            transform-origin: 0% 50%;
+        }
+
+
+        .boat-oar-right {
+            position: absolute;
+            right: 10px;
+            bottom: 2px;
+            width: 12px;
+            height: 2px;
+            background-color: #654321;
+            transform: rotate(10deg);
+            z-index: 0;
+            animation: rowOar 1.5s infinite alternate-reverse;
+            transform-origin: 100% 50%;
+        }
+
+
+        .water-ripple {
+            position: absolute;
+            right: -30px;
+            bottom: 0;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            animation: rippleEffect 2s infinite ease-in-out alternate;
+        }
+
+
+        .water-effect {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg,
+            rgba(52, 106, 149, 0.1) 0%,
+            rgba(92, 155, 209, 0.3) 20%,
+            rgba(52, 106, 149, 0.2) 40%,
+            rgba(92, 155, 209, 0.3) 60%,
+            rgba(52, 106, 149, 0.2) 80%,
+            rgba(92, 155, 209, 0.1) 100%);
+            background-size: 200% 100%;
+            border-radius: 4px;
+            top: 0;
+            left: 0;
+            animation: ancientWave 8s infinite linear;
+        }
+
+
+        @keyframes sailing {
+            from { width: 10%; }
+            to { width: 85%; }
+        }
+
+
+        @keyframes flagWave {
+            0%, 100% { transform: skewY(0deg); }
+            50% { transform: skewY(10deg); }
+        }
+
+
+        @keyframes rowOar {
+            0% { transform: rotate(-15deg); }
+            100% { transform: rotate(15deg); }
+        }
+
+
+        @keyframes rockAncientBoat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(2px) rotate(1deg); }
+        }
+
+        @keyframes rippleEffect {
+            0% { opacity: 0.3; transform: translateX(0); }
+            100% { opacity: 0.7; transform: translateX(-8px); }
+        }
+
+        @keyframes ancientWave {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        @keyframes reflection {
+            0%, 100% { opacity: 0.3; transform: scaleX(1); }
+            50% { opacity: 0.5; transform: scaleX(1.03); }
+        }
+
+        .logo {
+            width: 80px;
+            margin-bottom: 15px;
+            opacity: 0.85;
+        }
+
+        .alternatives {
+            background-color: #f5f5f5;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .alternatives h3 {
+            font-size: 16px;
+            margin-top: 0;
+            color: #444;
+        }
+
+        .alternatives ul {
+            padding-left: 20px;
+            margin: 10px 0 0;
+        }
+
+        .alternatives li {
+            margin-bottom: 8px;
+        }
+
+        .contact {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .timestamp {
+            font-size: 13px;
+            color: #888;
+            margin-top: 15px;
+        }
+
+        .refresh-btn {
+            background-color: #346a95;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background-color: #265277;
+        }
+
+        .message-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .icon {
+            font-size: 22px;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -39,13 +420,13 @@
     <h1>系統暫時無法使用</h1>
 
     <div class="status-container">
-        <div class="status-title">系統狀態更新</div>
+        <div class="status-title">系統維護中</div>
         <p>我們的網站目前正在進行緊急維護。技術團隊已經在處理這個問題，預計將很快恢復服務。</p>
     </div>
 
     <div class="message-container">
         <span class="icon">🔧</span>
-        <p class="estimate">預計恢復時間：15-20分鐘內</p>
+        <p class="estimate">預計恢復時間：120分鐘內</p>
     </div>
 
     <div class="loading-container">
@@ -72,14 +453,14 @@
                 <div class="water-ripple">～～</div>
             </div>
         </div>
-        <p>75% 完成，請稍候片刻</p>
+        <p>修復進度75% 完成，請稍候片刻</p>
     </div>
 
     <div class="alternatives">
         <h3>在等待期間您可以：</h3>
         <ul>
-            <li>查看我們的<a href="#">臉書粉絲專頁</a>獲取最新消息</li>
-            <li>瀏覽<a href="#">故宮典藏精選</a>線上展覽</li>
+            <li>查看我們的<a href="https://www.facebook.com/npmgov/?locale=zh_TW">臉書粉絲專頁</a>獲取最新消息</li>
+            <li>瀏覽<a href="https://theme.npm.edu.tw/selection/">故宮典藏精選</a>線上展覽</li>
             <li>訂閱我們的電子報以獲取展覽更新</li>
         </ul>
     </div>
